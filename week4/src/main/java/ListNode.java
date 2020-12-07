@@ -1,5 +1,3 @@
-import org.w3c.dom.NodeList;
-
 public class ListNode {
 
     public ListNode tail;
@@ -40,5 +38,19 @@ public class ListNode {
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        ListNode node = this;
+
+        String result = "[ ";
+        while (node != null) {
+            result +=  node.value + " ";
+            node = node.tail;
+        }
+        result += "]";
+
+        return result;
     }
 }

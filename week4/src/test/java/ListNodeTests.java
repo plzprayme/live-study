@@ -32,17 +32,9 @@ public class ListNodeTests {
     @DisplayName("ADD CORRECT? ")
     void addTEST() {
         ListNode case1 = ListNode.add(head, tail, 0);
-        assumeTrue(case1.value == 999);
-        assumeTrue(case1.tail.value == 0);
+        assumeTrue(case1.toString().equals("[ 999 0 1 2 4 ]"));
 
         ListNode case2 = ListNode.add(head, longTail, 2);
-        assumeTrue(case2.value == 0);
-        assumeTrue(case2.tail.tail.value == 998);
-        assumeTrue(case2.tail.tail.tail.value == 997);
-
-        ListNode case3 = ListNode.add(head, longTail, 1);
-        assumeTrue(case2.value == 0);
-        assumeTrue(case2.tail.value == 998);
-        assumeTrue(case2.tail.tail.value == 997);
+        assumeTrue(case2.toString().equals("[ 0 1 998 997 2 4 ]"));
     }
 }
