@@ -1,16 +1,9 @@
+import org.w3c.dom.NodeList;
+
 public class ListNode {
 
-
-
-    private ListNode tail;
-    private int value;
-
-    public ListNode() {
-    }
-
-    public ListNode(int value) {
-        this.value = value;
-    }
+    public ListNode tail;
+    public int value;
 
     public ListNode(int value, ListNode tail) {
         this.value = value;
@@ -18,31 +11,31 @@ public class ListNode {
     }
 
     public static ListNode add(ListNode head, ListNode nodeToAdd, int position) {
-
-        if (position == 1) {
-            nodeToAdd.getLastTail().tail = head.tail;
-            head.tail = nodeToAdd;
-            return head;
+        if (position == 0) {
+            nodeToAdd.getLastTail().tail = head;
+            return nodeToAdd;
         }
 
-        int headPosition = 0;
-        while (position > headPosition) {
-
+        ListNode clone = head;
+        while (position != 1) {
+            --position;
+            clone = clone.tail;
         }
-//        head.setTail(nodeToAdd);
-        return new ListNode();
+
+        nodeToAdd.getLastTail().tail = clone.tail;
+        clone.tail = nodeToAdd;
+
+        return head;
     }
 
-    public int getValue() {
-        return value;
-    }
+
 
     public ListNode getLastTail() {
         return this.tail == null? this : tail.getLastTail();
     }
 
     public static ListNode remove(ListNode head, int positionToRemove) {
-        return new ListNode();
+        return new ListNode(-1, null);
     }
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
