@@ -14,16 +14,19 @@ public class ListNode {
             return nodeToAdd;
         }
 
-        ListNode clone = head;
-        while (position != 1) {
-            --position;
-            clone = clone.tail;
-        }
-
-        nodeToAdd.getLastTail().tail = clone.tail;
-        clone.tail = nodeToAdd;
+        add(head,nodeToAdd, 1, position);
 
         return head;
+    }
+
+    public static void add(ListNode head, ListNode nodeToAdd, int headPosition, int position) {
+        if (headPosition != position) {
+            add(head.tail, nodeToAdd, ++headPosition, position);
+            return;
+        }
+
+        nodeToAdd.getLastTail().tail = head.tail;
+        head.tail = nodeToAdd;
     }
 
     public static ListNode remove(ListNode head, int positionToRemove) {
