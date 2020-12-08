@@ -1,7 +1,19 @@
-public class ListNode {
+import java.util.Arrays;
+
+public class ListNode implements Cloneable {
 
     public ListNode tail;
-    public int value;
+    public Integer value;
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public ListNode(ListNode node) {
+        tail = node.tail;
+        value = node.value;
+    }
 
     public ListNode(int value, ListNode tail) {
         this.value = value;
@@ -9,13 +21,18 @@ public class ListNode {
     }
 
     public static ListNode add(ListNode head, ListNode nodeToAdd, int position) {
+        try {
+            head = (ListNode) head.clone();
+            nodeToAdd = (ListNode) nodeToAdd.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
         if (position == 0) {
             nodeToAdd.getLastTail().tail = head;
             return nodeToAdd;
         }
 
         add(head,nodeToAdd, 1, position);
-
         return head;
     }
 
