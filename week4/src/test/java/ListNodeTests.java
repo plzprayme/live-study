@@ -29,12 +29,19 @@ public class ListNodeTests {
     }
 
     @Test
-    @DisplayName("ADD CORRECT? ")
-    void addTEST() {
+    @DisplayName("ADD TEST ")
+    void addTest() {
         ListNode case1 = ListNode.add(head, tail, 0);
         assumeTrue(case1.toString().equals("[ 999 0 1 2 4 ]"));
 
         ListNode case2 = ListNode.add(head, longTail, 2);
         assumeTrue(case2.toString().equals("[ 0 1 998 997 2 4 ]"));
+    }
+
+    @Test
+    @DisplayName("GET SIZE ")
+    void sizeTest() {
+        assumeTrue(head.getSize() == 4);
+        assumeTrue(tail.getSize() == 1);
     }
 }

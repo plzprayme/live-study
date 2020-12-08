@@ -32,6 +32,15 @@ public class ListNode {
         return this.tail == null? this : tail.getLastTail();
     }
 
+    public int getSize() {
+        return getSize(1);
+    }
+
+    private int getSize(int size) {
+        return this.tail != null? tail.getSize(++size) : size;
+
+    }
+
     public static ListNode remove(ListNode head, int positionToRemove) {
         return new ListNode(-1, null);
     }
