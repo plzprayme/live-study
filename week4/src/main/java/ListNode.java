@@ -26,23 +26,19 @@ public class ListNode {
         return head;
     }
 
-
-
-    public ListNode getLastTail() {
-        return this.tail == null? this : tail.getLastTail();
-    }
-
-    public int getSize() {
-        return getSize(1);
-    }
-
-    private int getSize(int size) {
-        return this.tail != null? tail.getSize(++size) : size;
-
-    }
-
     public static ListNode remove(ListNode head, int positionToRemove) {
-        return new ListNode(-1, null);
+        if (positionToRemove == 0) {
+            return head.tail;
+        }
+
+        ListNode clone = head;
+        while (positionToRemove != 1) {
+            --positionToRemove;
+            clone = clone.tail;
+        }
+
+        clone.tail = clone.tail.tail;
+        return head;
     }
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
@@ -61,5 +57,18 @@ public class ListNode {
         result += "]";
 
         return result;
+    }
+
+    public ListNode getLastTail() {
+        return this.tail == null? this : tail.getLastTail();
+    }
+
+    public int getSize() {
+        return getSize(1);
+    }
+
+    private int getSize(int size) {
+        return this.tail != null? tail.getSize(++size) : size;
+
     }
 }

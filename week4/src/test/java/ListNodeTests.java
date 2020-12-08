@@ -29,13 +29,28 @@ public class ListNodeTests {
     }
 
     @Test
-    @DisplayName("ADD TEST ")
+    @DisplayName("ADD TEST")
     void addTest() {
         ListNode case1 = ListNode.add(head, tail, 0);
         assumeTrue(case1.toString().equals("[ 999 0 1 2 4 ]"));
 
         ListNode case2 = ListNode.add(head, longTail, 2);
         assumeTrue(case2.toString().equals("[ 0 1 998 997 2 4 ]"));
+    }
+
+    @Test
+    @DisplayName("REMOVE TEST")
+    void removeTest() {
+        ListNode case1 = ListNode.remove(head, 0);
+        assumeTrue(case1.toString().equals("[ 1 2 4 ]"));
+
+        ListNode case2 = ListNode.remove(head, 1);
+        System.out.println(case2);
+        assumeTrue(case2.toString().equals("[ 0 2 4 ]"));
+
+        ListNode case3 = ListNode.remove(head, 2);
+        System.out.println(case3);
+        assumeTrue(case3.toString().equals("[ 0 1 4 ]"));
     }
 
     @Test
