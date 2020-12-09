@@ -23,7 +23,8 @@ public class ListNode {
     }
 
     public static ListNode add(ListNode head, ListNode nodeToAdd, int position) {
-//        head =
+        head = head.duplicate();
+        nodeToAdd = nodeToAdd.duplicate();
         if (position == 0) {
             nodeToAdd.getLastTail().tail = head;
             return nodeToAdd;
