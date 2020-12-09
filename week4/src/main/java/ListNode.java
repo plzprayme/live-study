@@ -1,6 +1,6 @@
-import java.util.Arrays;
+import org.w3c.dom.Node;
 
-public class ListNode implements Cloneable {
+public class ListNode {
 
     public ListNode tail;
     public Integer value;
@@ -9,6 +9,8 @@ public class ListNode implements Cloneable {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+
 
     public ListNode(ListNode node) {
         tail = node.tail;
@@ -21,12 +23,7 @@ public class ListNode implements Cloneable {
     }
 
     public static ListNode add(ListNode head, ListNode nodeToAdd, int position) {
-        try {
-            head = (ListNode) head.clone();
-            nodeToAdd = (ListNode) nodeToAdd.clone();
-        } catch (CloneNotSupportedException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
+//        head =
         if (position == 0) {
             nodeToAdd.getLastTail().tail = head;
             return nodeToAdd;
@@ -36,7 +33,7 @@ public class ListNode implements Cloneable {
         return head;
     }
 
-    public static void add(ListNode head, ListNode nodeToAdd, int headPosition, int position) {
+    private static void add(ListNode head, ListNode nodeToAdd, int headPosition, int position) {
         if (headPosition != position) {
             add(head.tail, nodeToAdd, ++headPosition, position);
             return;
@@ -44,6 +41,24 @@ public class ListNode implements Cloneable {
 
         nodeToAdd.getLastTail().tail = head.tail;
         head.tail = nodeToAdd;
+    }
+
+    public ListNode duplicate() {
+        ListNode cloneNode = new ListNode(value, null);
+
+        if (tail != null) {
+            tail.duplicate(cloneNode);
+        }
+
+        return cloneNode;
+    }
+
+    private void duplicate(ListNode cloneNode) {
+        cloneNode.tail = new ListNode(this.value, null);
+
+        if (tail != null) {
+            tail.duplicate(cloneNode.tail);
+        }
     }
 
     public static ListNode remove(ListNode head, int positionToRemove) {

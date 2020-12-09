@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class ListNodeTests {
@@ -61,6 +62,15 @@ public class ListNodeTests {
         ListNode case3 = ListNode.remove(head, 2);
         System.out.println(case3);
         assumeTrue(case3.toString().equals("[ 0 1 4 ]"));
+    }
+
+    @Test
+    @DisplayName("CLONE TEST")
+    void cloneTest() {
+        ListNode case1 = head.duplicate();
+        assumeTrue(case1.toString().equals(head.toString()));
+        assumeTrue(case1.getClass() == head.getClass());
+        assumeFalse(case1 == head);
     }
 
     @Test
