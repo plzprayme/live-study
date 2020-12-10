@@ -1,21 +1,7 @@
-import org.w3c.dom.Node;
-
 public class ListNode {
 
     public ListNode tail;
     public Integer value;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-
-
-    public ListNode(ListNode node) {
-        tail = node.tail;
-        value = node.value;
-    }
 
     public ListNode(int value, ListNode tail) {
         this.value = value;
@@ -25,12 +11,13 @@ public class ListNode {
     public static ListNode add(ListNode head, ListNode nodeToAdd, int position) {
         head = head.duplicate();
         nodeToAdd = nodeToAdd.duplicate();
+
         if (position == 0) {
             nodeToAdd.getLastTail().tail = head;
             return nodeToAdd;
         }
 
-        add(head,nodeToAdd, 1, position);
+        add(head, nodeToAdd, 1, position);
         return head;
     }
 
@@ -78,6 +65,35 @@ public class ListNode {
     }
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
+        if (nodeTocheck.getSize() > head.getSize()) {
+            return false;
+        }
+
+        for (int i = 0; i < head.getSize(); i++) {
+            if (head.contains(nodeTocheck)) {
+                return true;
+            }
+
+            head = head.tail;
+            nodeTocheck = nodeTocheck.tail;
+        }
+
+        return false;
+    }
+
+    private boolean contains(ListNode nodeTocheck) {
+        if (nodeTocheck.tail == null) {
+            if (value == nodeTocheck.value) {
+                return true;
+            }
+
+            return false;
+        }
+
+        if (value == nodeTocheck.value) {
+            tail.contains(nodeTocheck.tail);
+        }
+
         return true;
     }
 
@@ -87,7 +103,7 @@ public class ListNode {
 
         String result = "[ ";
         while (node != null) {
-            result +=  node.value + " ";
+            result += node.value + " ";
             node = node.tail;
         }
         result += "]";
@@ -96,7 +112,7 @@ public class ListNode {
     }
 
     public ListNode getLastTail() {
-        return this.tail == null? this : tail.getLastTail();
+        return this.tail == null ? this : tail.getLastTail();
     }
 
     public int getSize() {
@@ -104,7 +120,7 @@ public class ListNode {
     }
 
     private int getSize(int size) {
-        return this.tail != null? tail.getSize(++size) : size;
+        return this.tail != null ? tail.getSize(++size) : size;
 
     }
 }

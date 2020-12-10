@@ -10,6 +10,8 @@ public class ListNodeTests {
     ListNode head;
     ListNode tail;
     ListNode longTail;
+    ListNode node1;
+    ListNode node2;
 
     @BeforeEach
     void init() {
@@ -20,6 +22,9 @@ public class ListNodeTests {
 
         tail = new ListNode(999, null);
         longTail = new ListNode(998, new ListNode(997, null));
+
+        node1 = new ListNode(0, null);
+        node2 = new ListNode(0, new ListNode(1, null));
     }
 
     @Test
@@ -74,9 +79,17 @@ public class ListNodeTests {
     }
 
     @Test
-    @DisplayName("GET SIZE ")
+    @DisplayName("GET SIZE TEST")
     void sizeTest() {
         assumeTrue(head.getSize() == 4);
         assumeTrue(tail.getSize() == 1);
+    }
+
+    @Test
+    @DisplayName("CONTAIN TEST")
+    void containtTest() {
+        assumeTrue(ListNode.contains(head, node1));
+        assumeTrue(ListNode.contains(head, node2));
+        assumeFalse(ListNode.contains(node1, node2));
     }
 }
