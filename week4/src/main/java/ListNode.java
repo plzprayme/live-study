@@ -1,7 +1,7 @@
 public class ListNode {
 
     public ListNode tail;
-    public Integer value;
+    public int value;
 
     public ListNode(int value, ListNode tail) {
         this.value = value;
@@ -17,13 +17,13 @@ public class ListNode {
             return nodeToAdd;
         }
 
-        add(head, nodeToAdd, 1, position);
+        addRecursive(head, nodeToAdd, position);
         return head;
     }
 
-    private static void add(ListNode head, ListNode nodeToAdd, int headPosition, int position) {
-        if (headPosition != position) {
-            add(head.tail, nodeToAdd, ++headPosition, position);
+    private static void addRecursive(ListNode head, ListNode nodeToAdd, int position) {
+        if (1 != position) {
+            addRecursive(head.tail, nodeToAdd, --position);
             return;
         }
 
@@ -50,18 +50,23 @@ public class ListNode {
     }
 
     public static ListNode remove(ListNode head, int positionToRemove) {
+        ListNode clone = head.duplicate();
         if (positionToRemove == 0) {
-            return head.tail;
+            clone = head.tail;
+            return clone;
         }
 
-        ListNode clone = head;
-        while (positionToRemove != 1) {
-            --positionToRemove;
-            clone = clone.tail;
+        removeRecursive(clone, positionToRemove);
+        return clone;
+    }
+
+    private static void removeRecursive(ListNode head, int positionToRemove) {
+        if (positionToRemove != 1) {
+            removeRecursive(head.tail, --positionToRemove);
+            return;
         }
 
-        clone.tail = clone.tail.tail;
-        return head;
+        head.tail = head.tail.tail;
     }
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
@@ -110,7 +115,6 @@ public class ListNode {
 
         return result;
     }
-
     public ListNode getLastTail() {
         return this.tail == null ? this : tail.getLastTail();
     }
