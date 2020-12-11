@@ -17,18 +17,18 @@ public class ListNode {
             return nodeToAdd;
         }
 
-        addRecursive(head, nodeToAdd, position);
+        head.add( nodeToAdd, position);
         return head;
     }
 
-    private static void addRecursive(ListNode head, ListNode nodeToAdd, int position) {
+    private void add(ListNode nodeToAdd, int position) {
         if (1 != position) {
-            addRecursive(head.tail, nodeToAdd, --position);
+            tail.add(nodeToAdd, --position);
             return;
         }
 
-        nodeToAdd.getLastTail().tail = head.tail;
-        head.tail = nodeToAdd;
+        nodeToAdd.getLastTail().tail = tail;
+        tail = nodeToAdd;
     }
 
     public ListNode duplicate() {
@@ -56,20 +56,22 @@ public class ListNode {
             return clone;
         }
 
-        removeRecursive(clone, positionToRemove);
+        clone.remove(positionToRemove);
         return clone;
     }
 
-    private static void removeRecursive(ListNode head, int positionToRemove) {
+    private void remove(int positionToRemove) {
         if (positionToRemove != 1) {
-            removeRecursive(head.tail, --positionToRemove);
+            tail.remove(--positionToRemove);
             return;
         }
 
-        head.tail = head.tail.tail;
+        tail = tail.tail;
     }
 
     public static boolean contains(ListNode head, ListNode nodeTocheck) {
+        head = head.duplicate();
+        nodeTocheck = nodeTocheck.duplicate();
         if (nodeTocheck.getSize() > head.getSize()) {
             return false;
         }
@@ -80,7 +82,6 @@ public class ListNode {
             }
 
             head = head.tail;
-            nodeTocheck = nodeTocheck.tail;
         }
 
         return false;
@@ -88,18 +89,14 @@ public class ListNode {
 
     private boolean contains(ListNode nodeTocheck) {
         if (nodeTocheck.tail == null) {
-            if (value == nodeTocheck.value) {
-                return true;
-            }
+            return value == nodeTocheck.value;
+        }
 
+        if (value != nodeTocheck.value) {
             return false;
         }
 
-        if (value == nodeTocheck.value) {
-            tail.contains(nodeTocheck.tail);
-        }
-
-        return true;
+        return tail.contains(nodeTocheck.tail);
     }
 
     @Override
