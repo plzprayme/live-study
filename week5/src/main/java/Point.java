@@ -1,10 +1,22 @@
 public class Point {
     public double x, y;
 
-    public Point(double x, double y) {
+    // 다른 생성자를 생성하면 기본 생성자가 생략된다.
+    Point() {
+
+    }
+
+    // 생성자 여러개 생성 가능
+    Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
+
+    // 생성자 여러개 생성 가능 매개변수는 달라야한다.
+    Point(Point p) {
+        this = p;
+    }
+
 
     // 기본형
     public double distanceFromOrigin() {
